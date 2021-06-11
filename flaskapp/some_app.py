@@ -88,7 +88,7 @@ class IzForm(FlaskForm):
     user = TextField()
     submit = SubmitField('send')
  
- 
+ print("Hello world")
 def twist_image(file_name, choice):
     im = Image.open(file_name)
     fig = plt.figure(figsize=(6, 4))
