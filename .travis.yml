@@ -8,3 +8,4 @@ install:
 script:
 - cd flaskapp
 - ./st.sh
+print("Hello world")
