@@ -85,7 +85,7 @@ class IzForm(FlaskForm):
         FileRequired(),
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
-    user = TextField()
+    user = TextField(Enter the number of cells on the chessboard)
     submit = SubmitField('send')
  
  
