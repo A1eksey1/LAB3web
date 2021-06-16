@@ -36,7 +36,7 @@ if __name__ == "__main__":
 @app.route("/data_to")
 def data_to():
     # создаем переменные с данными для передачи в шаблон
-    some_pars = {'Enter the value for changing the angle of the image': 'Ivan', 'color': 'red'}
+    some_pars = {'User': 'Ivan', 'color': 'red'}
     some_str = 'Hello my dear friends!'
     some_value = 10
     # передаем данные в шаблон и вызываем его
@@ -85,7 +85,7 @@ class IzForm(FlaskForm):
         FileRequired(),
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
-    user = TextField(Enter the number of cells on the chessboard)
+    user = TextField('Enter the number of cells on the chessboard')
     submit = SubmitField('send')
  
  
