@@ -169,10 +169,17 @@ def krest_image(file_name, choice, choice1):
         W=''
         W=str((y//3)*2)
     #for i in range((x//2)-(int(W)//2),(x//2)+(int(W)//2)):
-    for i in range(0,50):
+    for i in range(0,stroka1):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
+        
+#   for i in range(0,50):
+#        for j in range(0,y):
+#            im.putpixel((i,j),(int(R),int(G),int(B)))
     
+ #   for i in range(0,x):
+ #       for j in range(0,100):
+#            im.putpixel((i,j),(int(R),int(G),int(B)))
     for i in range(0,x):
         for j in range(0,100):
             im.putpixel((i,j),(int(R),int(G),int(B)))
