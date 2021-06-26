@@ -167,7 +167,7 @@ def krest_image(file_name, choice, choice1):
         W=str(x)
     if (int(W)//2)>(y//3):
         W=''
-        W=str((y//3)*2)
+        W=str((y//3))
     
     for i in range((x//2)-(int(W)//2),(x//2)+(int(W)//2)):
         for j in range(0,y):
