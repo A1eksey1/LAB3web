@@ -86,7 +86,7 @@ class IzForm(FlaskForm):
         FileRequired(),
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
-    width=TextField('Width (in pixels, 100 min) format : width')
+    width=TextField('Width (in pixels, 2 min , 120 max) format : width')
     submit = SubmitField('send')
  
  
@@ -103,19 +103,6 @@ def krest_image(file_name, choice, choice1):
     plt.savefig(gr_path)
     plt.close()
     
-    for e in range(0,len(choice)):
-        if  (choice[e]=='1')or(choice[e]=='2')or(choice[e]=='3')or(choice[e]=='4')or\
-            (choice[e]=='5')or(choice[e]=='6')or(choice[e]=='7')or(choice[e]=='8')or\
-            (choice[e]=='9')or(choice[e]=='0')or(choice[e]==','):
-                stroka=stroka+choice[e]
-        
-    zap=stroka.count(',')
-    if zap==0:
-        stroka=stroka+',0,0'
-    if (zap==0)and(len(stroka)==0):
-        stroka='0,0,0'
-    if zap==1:
-        stroka=stroka+',0'
     stroka1=''
       
     for e in range(0,len(choice1)):
@@ -125,39 +112,20 @@ def krest_image(file_name, choice, choice1):
                 stroka1=stroka1+choice1[e]
         
     if len(stroka1)==0:
-        stroka1='2'
-      
+        stroka1='2'     
     if int(stroka1)<2:
         stroka1='2'
+    if int (stroka)>120
+        stroka1='120'
    
-    stroka=stroka+','
-    stroka=stroka+stroka1
+
+
       
-    W=''
-    R=''    
-    G=''
-    B=''
-    char=stroka.find(',',0,len(stroka))
-    R=stroka[0:char]
-    char1=stroka.find(',',char+1,len(stroka))
-    G=stroka[char+1:char1]
-    char2=stroka.find(',',char1+1,len(stroka))
-    B=stroka[char1+1:char2]
-    W=stroka[char2+1:len(stroka)]
-    stroka=''
-    zap=W.count(',')
-    if zap>0:
-        stroka=W[0:W.find(',',0,len(W))]
-        W=''
-        W=stroka
-    if int(R)>255:
-        R='255'
-    if int(G)>255:
-        G='255'
-    if int(B)>255:
-        B='255'
-    if int(W)<2:
-        W='2'
+
+    W='2'
+    R='2'
+    G='2'
+    B='2'
     x, y = im.size
     
     if (int(W)//2)>(x//2):
