@@ -86,7 +86,7 @@ class IzForm(FlaskForm):
         FileRequired(),
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
-    user = TextField('RGB (0-255) format : R,G,B')
+    user = TextField(' (0-255) format : R,G,B')
     width=TextField('Width (in pixels, 2 min) format : width')
     submit = SubmitField('send')
  
@@ -167,7 +167,7 @@ def krest_image(file_name, choice, choice1):
         W=str(x)
     if (int(W)//2)>(y//3):
         W=''
-        W=str((y//3))
+        W=str((y//3)*2)
     
     for i in range((x//2)-(int(W)//2),(x//2)+(int(W)//2)):
         for j in range(0,y):
