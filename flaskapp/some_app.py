@@ -86,7 +86,7 @@ class IzForm(FlaskForm):
         FileRequired(),
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
-    width=TextField('Width (in pixels, 2 min) format : width')
+    width=TextField('Width (in pixels, 100 min) format : width')
     submit = SubmitField('send')
  
  
