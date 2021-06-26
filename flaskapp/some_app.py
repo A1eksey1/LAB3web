@@ -55,8 +55,8 @@ SECRET_KEY = 'secret'
 app.config['SECRET_KEY'] = SECRET_KEY
 # используем капчу и полученные секретные ключи с сайта google 
 app.config['RECAPTCHA_USE_SSL'] = False
-app.config['RECAPTCHA_PUBLIC_KEY'] = '6LfeLVobAAAAABvcrC05KCuTOc4gFcwJcNDwNppQ'
-app.config['RECAPTCHA_PRIVATE_KEY'] = '6LfeLVobAAAAALzQMmwfO5jOVIAroZO_PN_p4zEV'
+app.config['RECAPTCHA_PUBLIC_KEY'] = '6LdKayobAAAAABRFZ01xqgQFpdgxa9alAcQy1Z-1'
+app.config['RECAPTCHA_PRIVATE_KEY'] = '6LdKayobAAAAAPgmoavw3T_leVje_TMPhk0UCfcm'
 app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
 # обязательно добавить для работы со стандартными шаблонами
  
@@ -86,6 +86,7 @@ class IzForm(FlaskForm):
         FileRequired(),
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
+    user = TextField('RGB (0-255) format : R,G,B')
     width=TextField('Width (in pixels, 2 min) format : width')
     submit = SubmitField('send')
  
@@ -103,6 +104,20 @@ def krest_image(file_name, choice, choice1):
     plt.savefig(gr_path)
     plt.close()
     
+    stroka=''
+    for e in range(0,len(choice)):
+        if  (choice[e]=='1')or(choice[e]=='2')or(choice[e]=='3')or(choice[e]=='4')or\
+            (choice[e]=='5')or(choice[e]=='6')or(choice[e]=='7')or(choice[e]=='8')or\
+            (choice[e]=='9')or(choice[e]=='0')or(choice[e]==','):
+                stroka=stroka+choice[e]
+        
+    zap=stroka.count(',')
+    if zap==0:
+        stroka=stroka+',0,0'
+    if (zap==0)and(len(stroka)==0):
+        stroka='0,0,0'
+    if zap==1:
+        stroka=stroka+',0'
     stroka1=''
       
     for e in range(0,len(choice1)):
@@ -116,24 +131,59 @@ def krest_image(file_name, choice, choice1):
       
     if int(stroka1)<2:
         stroka1='2'
+   
+    stroka=stroka+','
+    stroka=stroka+stroka1
       
+    W=''
+    R=''    
+    G=''
+    B=''
+    char=stroka.find(',',0,len(stroka))
+    R=stroka[0:char]
+    char1=stroka.find(',',char+1,len(stroka))
+    G=stroka[char+1:char1]
+    char2=stroka.find(',',char1+1,len(stroka))
+    B=stroka[char1+1:char2]
+    W=stroka[char2+1:len(stroka)]
+    stroka=''
+    zap=W.count(',')
+    if zap>0:
+        stroka=W[0:W.find(',',0,len(W))]
+        W=''
+        W=stroka
+    if int(R)>255:
+        R='255'
+    if int(G)>255:
+        G='255'
+    if int(B)>255:
+        B='255'
+    if int(W)<2:
+        W='2'
     x, y = im.size
     
-    #for i in range((x//2)-(int(W)//2),(x//2)+(int(W)//2)):
-    for i in range(0,int(stroka1)):
-        for j in range(0,y):
-            im.putpixel((i,j),0,255,0)
-        
-#   for i in range(0,50):
-#        for j in range(0,y):
-#            im.putpixel((i,j),(int(R),int(G),int(B)))
+    if (int(W)//2)>(x//2):
+        W=''
+        W=str(x)
+    if (int(W)//2)>(y//3):
+        W=''
+        W=str((y//3)*2)
     
- #   for i in range(0,x):
- #       for j in range(0,100):
-#            im.putpixel((i,j),(int(R),int(G),int(B)))
+    for i in range(0, int(stroka1)):
+        for j in range(0,y):
+            im.putpixel((i,j),(int(R),int(G),int(B)))
+        
+    for i in range(x-int(stroka1), x):
+        for j in range(0,y):
+            im.putpixel((i,j),(int(R),int(G),int(B)))
+            
     for i in range(0,x):
-        for j in range(0,int(stroka1)):
-            im.putpixel((i,j),0,255,0)
+        for j in range(0, int(stroka1)):
+            im.putpixel((i,j),(int(R),int(G),int(B)))
+        
+    for i in range(0,x):
+        for j in range(y-int(stroka1), y):
+            im.putpixel((i,j),(int(R),int(G),int(B)))
     im.save(file_name)
     ax.imshow(im)
     
