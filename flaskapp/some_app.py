@@ -115,7 +115,7 @@ def krest_image(file_name, choice, choice1):
         stroka1='2'     
     if int(stroka1)<2:
         stroka1='2'
-    if int (stroka)>120
+    if int (stroka)>120:
         stroka1='120'
    
 
