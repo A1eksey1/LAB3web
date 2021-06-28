@@ -6,8 +6,7 @@ from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
-from tkinter import Tk, BOTH, IntVar, LEFT
-from tkinter.ttk import Frame, Label, Scale, Style
+
 import os
 from flask import request
 from flask import Response
