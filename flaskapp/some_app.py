@@ -47,29 +47,7 @@ def data_to():
     return render_template('simple.html', some_str=some_str,
                            some_value=some_value, some_pars=some_pars)
  
-class Example(Frame):
- 
-    def __init__(self):
-        super().__init__()
-        self.initUI()
- 
-    def initUI(self):
-        self.master.title("Шкала с ползунком")
-        self.style = Style()
-        self.style.theme_use("default")
- 
-        self.pack(fill=BOTH, expand=1)
- 
-        scale = Scale(self, from_=0, to=100, command=self.onScale)
-        scale.pack(side=LEFT, padx=15)
- 
-        self.var = IntVar()
-        self.label = Label(self, text=0, textvariable=self.var)
-        self.label.pack(side=LEFT)
- 
-    def onScale(self, val):
-        v = int(float(val))
-        self.var.set(v)
+
  
 # модули работы с формами и полями в формах
  
