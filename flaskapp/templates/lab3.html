@@ -1,26 +1,18 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 <!-- задаем заголовок страницы -->
-{% block title %}This is an page{% endblock %}
+{% block title %}This is a page{% endblock %}
 <!-- блок body -->
 {% block content %}
-{{ wtf.quick_form(form, method='post',enctype="multipart/form-data", action="lab3") }}
-<!-- один из стандартных тэгов html - заголовок второго уровня -->
-<h2>Image is here: </h2>
-<!-- отображаем загруженное изображение с закругленными углами -->
-<!-- если оно есть (после submit) -->
-{% if image_name %}
-<table border= "1">
-<tr align="left">
-   <td><img src="image_name" class="img-rounded" alt="My Image" width = 224 height=224/></td>
-   <td><img src="filename_graph" class="img-rounded" alt="My Image" width = 224 height=224/></td> </tr>
-<tr align="right">
-   <td></td>
-   <td></td> </tr>
+{{ wtf.quick_form(form, method='post',enctype="multipart/form-data", action="iz") }}
+{% if image_res %}
+<!-- проверяем есть ли данные -->
+<h2>Results: </h2>
+<table> 
+ <!-- запускаем цикл прохода по списку и отображаем -->
+ {% for name in image_res %}
+ <tr><td>{{name}}</td><td><img src={{name}} class="img-rounded" alt={{name}} width=400px /></td><td>{{image_res[name]}}</td></tr>
+ {% endfor %} 
 </table>
-
-{% else %}
- <p> There is no image yet </p>
 {% endif %}
-{% endblock %}
-
+{% endblock %} 
