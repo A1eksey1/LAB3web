@@ -9,6 +9,14 @@
 <h2>Image is here: </h2>
 <!-- отображаем загруженное изображение с закругленными углами -->
 <!-- если оно есть (после submit) -->
+<h2>Results: </h2>
+<table>
+<!-- запускаем цикл прохода по списку и отображаем -->
+{% for name in image_res %}
+<tr><td>{{name}}</td><td><img src={{name}} class="img-rounded" alt={{name}}
+width=400px /></td><td>{{image_res[name]}}</td></tr>
+{% endfor %}
+</table>
 {% if image_name %}
  <p>{{image_name}}
  <p><img src={{image_name}} class="img-rounded" alt="My Image" width = 224 height=224 />
@@ -17,3 +25,4 @@
  <p> There is no image yet </p>
 {% endif %}
 {% endblock %}
+
