@@ -6,6 +6,8 @@ from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
+from tkinter import Tk, BOTH, IntVar, LEFT
+from tkinter.ttk import Frame, Label, Scale, Style
 import os
 from flask import request
 from flask import Response
@@ -17,7 +19,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import string
-import tkinter as tk
+
  
 # import lxml.etree as ET
  
@@ -63,15 +65,42 @@ app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
  
 bootstrap = Bootstrap(app)
  
-class App(tk.Tk):
+
+ 
+class Example(Frame):
+ 
     def __init__(self):
         super().__init__()
-        self.spinbox = tk.Spinbox(self, from_=0, to=255)
-        self.scale = tk.Scale(self, from_=0, to=255,
-                              orient=tk.HORIZONTAL)
-        self.spinbox.pack()
-        self.scale.pack()
-        self.btn.pack()
+        self.initUI()
+ 
+    def initUI(self):
+        self.master.title("Шкала с ползунком")
+        self.style = Style()
+        self.style.theme_use("default")
+ 
+        self.pack(fill=BOTH, expand=1)
+ 
+        scale = Scale(self, from_=0, to=100, command=self.onScale)
+        scale.pack(side=LEFT, padx=15)
+ 
+        self.var = IntVar()
+        self.label = Label(self, text=0, textvariable=self.var)
+        self.label.pack(side=LEFT)
+ 
+    def onScale(self, val):
+        v = int(float(val))
+        self.var.set(v)
+ 
+ 
+def main():
+    root = Tk()
+    ex = Example()
+    root.geometry("250x100+300+300")
+    root.mainloop()
+ 
+ 
+if __name__ == '__main__':
+    main()
 
 # создаем форму для загрузки файла
 class NetForm(FlaskForm):
