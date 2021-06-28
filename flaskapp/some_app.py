@@ -47,26 +47,6 @@ def data_to():
     return render_template('simple.html', some_str=some_str,
                            some_value=some_value, some_pars=some_pars)
  
- 
-# модули работы с формами и полями в формах
- 
-# модули валидации полей формы
- 
- 
-# используем csrf токен, можете генерировать его сами
-SECRET_KEY = 'secret'
-app.config['SECRET_KEY'] = SECRET_KEY
-# используем капчу и полученные секретные ключи с сайта google 
-app.config['RECAPTCHA_USE_SSL'] = False
-app.config['RECAPTCHA_PUBLIC_KEY'] = '6LfeLVobAAAAABvcrC05KCuTOc4gFcwJcNDwNppQ'
-app.config['RECAPTCHA_PRIVATE_KEY'] = '6LfeLVobAAAAALzQMmwfO5jOVIAroZO_PN_p4zEV'
-app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
-# обязательно добавить для работы со стандартными шаблонами
- 
-bootstrap = Bootstrap(app)
- 
-
- 
 class Example(Frame):
  
     def __init__(self):
@@ -91,16 +71,26 @@ class Example(Frame):
         v = int(float(val))
         self.var.set(v)
  
+# модули работы с формами и полями в формах
  
-def main():
-    root = Tk()
-    ex = Example()
-    root.geometry("250x100+300+300")
-    root.mainloop()
+# модули валидации полей формы
  
  
-if __name__ == '__main__':
-    main()
+# используем csrf токен, можете генерировать его сами
+SECRET_KEY = 'secret'
+app.config['SECRET_KEY'] = SECRET_KEY
+# используем капчу и полученные секретные ключи с сайта google 
+app.config['RECAPTCHA_USE_SSL'] = False
+app.config['RECAPTCHA_PUBLIC_KEY'] = '6LfeLVobAAAAABvcrC05KCuTOc4gFcwJcNDwNppQ'
+app.config['RECAPTCHA_PRIVATE_KEY'] = '6LfeLVobAAAAALzQMmwfO5jOVIAroZO_PN_p4zEV'
+app.config['RECAPTCHA_OPTIONS'] = {'theme': 'white'}
+# обязательно добавить для работы со стандартными шаблонами
+ 
+bootstrap = Bootstrap(app)
+ 
+
+ 
+
 
 # создаем форму для загрузки файла
 class NetForm(FlaskForm):
