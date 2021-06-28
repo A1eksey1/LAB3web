@@ -12,12 +12,9 @@
 {% if image_name %}
 <table border= "0">
 <tr align="left">
-   <td><img src="image_name"></td>
-   <td><img src="filename_graph"></td>
+   <td><img src="image_name" class="img-rounded" alt="My Image" width = 224 height=224></td>
+   <td><img src="filename_graph" class="img-rounded" alt="My Image" width = 224 height=224></td>
 </table>
- <p>{{image_name}}
- <p><img src={{image_name}} class="img-rounded" alt="My Image" width = 224 height=224 />
- <p><img src={{filename_graph}} class="img-rounded" alt="My Image" width = 224 height=224 />
 {% else %}
  <p> There is no image yet </p>
 {% endif %}
