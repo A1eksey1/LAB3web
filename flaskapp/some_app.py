@@ -92,7 +92,7 @@ class IzForm(FlaskForm):
     recaptcha = RecaptchaField()
     user = TextField('RGB (0-255) format : R,G,B')
     width=TextField('Width (in pixels, 2 min) format : width')
-    height=TextField('checkerboard:')
+    height=TextField('checkerboard width : height')
     submit = SubmitField('send')
  
  
