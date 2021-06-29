@@ -98,7 +98,7 @@ class IzForm(FlaskForm):
  
 def krest_image(file_name, choice, choice1,choice2):
     im = Image.open(file_name)
-    im1 = Image.open(file_name)
+    im1 = Image.open(file_name1)
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot(1,1,1)
     data = np.random.randint(0, 255, (100, 100))
