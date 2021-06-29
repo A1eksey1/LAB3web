@@ -211,7 +211,7 @@ def krest_image(file_name, file_name1, choice, choice1,choice2):
     im1.save(file_name1)
     im.save(file_name)
     ax.imshow(im)
-    
+    ax.imshow(im1)
  
 @app.route("/lab3", methods=['GET', 'POST'])
 def iz():
