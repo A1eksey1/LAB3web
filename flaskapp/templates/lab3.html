@@ -39,8 +39,12 @@ function outputUpdate(vol) {
 <!-- если оно есть (после submit) -->
 {% if image_name %}
 <table border= "1">
- <td width="150" height="150", title="Result"><img src={{image_name}}></td>
-   <td width="150" height="150", title="graph"><img src={{filename_graph}}></td>
+<tr align="left"> 
+   <td><img src={{image_name}}></td>
+   <td><img src={{filename_graph}}></td>
+<tr align="right"> 
+   <td> Result</td>
+   <td> Graph</td> </tr>
 </table>
 {% else %}
  <p> There is no image yet </p>
