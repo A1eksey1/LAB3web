@@ -221,7 +221,6 @@ def iz():
     filename_graph=None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
-        photo = form.upload.data.filename1.split('.')[-1]
         filename1 = os.path.join('./static', f'photo.{photo}')
         filename = os.path.join('./static', f'photo.{photo}')
         filename_graph = os.path.join('./static', f'newgr.png')
