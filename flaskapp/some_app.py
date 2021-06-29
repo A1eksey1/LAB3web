@@ -138,6 +138,7 @@ def krest_image(file_name, choice, choice1, choiсe2):
         stroka1='2'
       
     stroka2=''
+    
     for e in range(0,len(choice2)):
         if  (choice2[e]=='1')or(choice2[e]=='2')or(choice2[e]=='3')or(choice2[e]=='4')or\
             (choice2[e]=='5')or(choice2[e]=='6')or(choice2[e]=='7')or(choice2[e]=='8')or\
