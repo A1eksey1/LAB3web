@@ -92,7 +92,7 @@ class IzForm(FlaskForm):
     recaptcha = RecaptchaField()
     user = TextField('RGB (0-255) format : R,G,B')
     width=TextField('Width (in pixels, 2 min) format : width')
-    width1=TextField('Width (in pixels, 2 min) format : width')
+    width1=TextField('Width for a chessboard:')
     submit = SubmitField('send')
  
  
@@ -178,7 +178,9 @@ def krest_image(file_name, choice, choice1):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
         
-
+    for i in range(x-int(stroka1), x):
+        for j in range(0,y):
+            im.putpixel((i,j),(int(R),int(G),int(B)))
     im.save(file_name)
     ax.imshow(im)
     
