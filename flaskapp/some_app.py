@@ -98,12 +98,16 @@ class IzForm(FlaskForm):
  
 def krest_image(file_name, choice, choice1):
     im = Image.open(file_name)
-    file_name1 = file_name
+    im1 = Image.open(file_name)
+    file_name1 = file_name.copy()
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot(1,1,1)
-    ax = fig.add_subplot(1,1,2)
+    ax1 = fig.add_subplot(1,1,2)
     data = np.random.randint(0, 255, (100, 100))
     ax.imshow(im, cmap='plasma')
+    ax1.imshow(im1, cmap='plasma')
+    im1.save(file_name1)
+    ax1.imshow(im1)
     b = ax.pcolormesh(data, edgecolors='black', cmap='plasma')
     fig.colorbar(b, ax=ax)
     gr_path = "./static/newgr.png"
