@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
-import sys
+import pygame, sys
 import os
 from flask import request
 from flask import Response
@@ -46,48 +46,6 @@ def data_to():
     return render_template('simple.html', some_str=some_str,
                            some_value=some_value, some_pars=some_pars)
  
-
-
-
-
-class Main(QtWidgets.QWidget):
-
-    def __init__(self):
-        super().__init__()
-        sld = QtWidgets.QSlider(QtCore.Qt.Horizontal, self)
-        sld.setStyleSheet("""
-            QSlider{
-                background: #E3DEE2;
-            }
-            QSlider::groove:horizontal {  
-                height: 10px;
-                margin: 0px;
-                border-radius: 5px;
-                background: #B0AEB1;
-            }
-            QSlider::handle:horizontal {
-                background: #fff;
-                border: 1px solid #E3DEE2;
-                width: 17px;
-                margin: -5px 0; 
-                border-radius: 8px;
-            }
-            QSlider::sub-page:qlineargradient {
-                background: #3B99FC;
-                border-radius: 5px;
-            }
-        """)
-        layout = QtWidgets.QVBoxLayout()
-        layout.addWidget(sld)
-        self.setLayout(layout)
-
-
-if __name__ == '__main__':
-
-    app = QtWidgets.QApplication(sys.argv)
-    main = Main()
-    main.show()
-    sys.exit(app.exec_())
 # модули работы с формами и полями в формах
  
 # модули валидации полей формы
@@ -133,6 +91,22 @@ class IzForm(FlaskForm):
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
     user = TextField('RGB (0-255) format : R,G,B')
+    a = 0
+    size_of_gas_cloud = 30
+
+    while True:
+
+        if pygame.mouse.get_pressed()[0] != 0:
+            # collision detection also needed here
+            a = pygame.mouse.get_pos()[0] - 5
+            if a < 0:
+                a = 0
+
+    size_of_gas_cloud += a
+
+    pygame.draw.rect(windowSurfaceObj, blackColor, Rect(0, 0, width, height))
+    pygame.draw.rect(windowSurfaceObj, redColor, Rect(a, 5, 10, 90))
+    pygame.display.update()
     width=TextField('Width (in pixels, 2 min) format : width')
     submit = SubmitField('send')
  
