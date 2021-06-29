@@ -136,7 +136,7 @@ def krest_image(file_name, choice, choice1):
       
     if int(stroka1)<2:
         stroka1='2'
-    stroka2=''
+
     stroka=stroka+','
     stroka=stroka+stroka1
       
