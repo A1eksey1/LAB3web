@@ -92,7 +92,6 @@ class IzForm(FlaskForm):
     recaptcha = RecaptchaField()
     user = TextField('RGB (0-255) format : R,G,B')
     width=TextField('Width (in pixels, 2 min) format : width')
-    widthch=TextField('Width for a chessboard:')
     submit = SubmitField('send')
  
  
@@ -124,7 +123,7 @@ def krest_image(file_name, choice, choice1):
     if zap==1:
         stroka=stroka+',0'
     stroka1=''
-    stroka2=''
+      
     for e in range(0,len(choice1)):
         if  (choice1[e]=='1')or(choice1[e]=='2')or(choice1[e]=='3')or(choice1[e]=='4')or\
             (choice1[e]=='5')or(choice1[e]=='6')or(choice1[e]=='7')or(choice1[e]=='8')or\
@@ -151,6 +150,7 @@ def krest_image(file_name, choice, choice1):
     char2=stroka.find(',',char1+1,len(stroka))
     B=stroka[char1+1:char2]
     W=stroka[char2+1:len(stroka)]
+    stroka=''
     zap=W.count(',')
     if zap>0:
         stroka=W[0:W.find(',',0,len(W))]
@@ -172,7 +172,7 @@ def krest_image(file_name, choice, choice1):
     if (int(W)//2)>(y//3):
         W=''
         W=str((y//3)*2)
-
+    
     for i in range(0, int(stroka1)):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
@@ -180,7 +180,7 @@ def krest_image(file_name, choice, choice1):
     for i in range(x-int(stroka1), x):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
-              
+            
     for i in range(0,x):
         for j in range(0, int(stroka1)):
             im.putpixel((i,j),(int(R),int(G),int(B)))
@@ -188,10 +188,6 @@ def krest_image(file_name, choice, choice1):
     for i in range(0,x):
         for j in range(y-int(stroka1), y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
-
-    for i in range(0, int(stroka2)):
-        for j in range(0,y):
-            im.putpixel((i,j),(0,0,0))
     im.save(file_name)
     ax.imshow(im)
     
@@ -206,7 +202,7 @@ def iz():
         filename = os.path.join('./static', f'photo.{photo}')
         filename_graph = os.path.join('./static', f'newgr.png')
         form.upload.data.save(filename)
-        krest_image(filename, form.user.data, form.width.data, form.widthch.data)
+        krest_image(filename, form.user.data, form.width.data)
     return render_template('lab3.html', form=form, image_name=filename,filename_graph=filename_graph)
  
 
@@ -265,6 +261,3 @@ def apixml():
     # преобразуем из памяти dom в строку, возможно, понадобится указать кодировку
     strfile = ET.tostring(newhtml)
     return strfile
-   
-
-
