@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
-import pygame, sys
+import sys
 import os
 from flask import request
 from flask import Response
@@ -91,22 +91,6 @@ class IzForm(FlaskForm):
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
     recaptcha = RecaptchaField()
     user = TextField('RGB (0-255) format : R,G,B')
-    a = 0
-    size_of_gas_cloud = 30
-
-    while True:
-
-        if pygame.mouse.get_pressed()[0] != 0:
-            # collision detection also needed here
-            a = pygame.mouse.get_pos()[0] - 5
-            if a < 0:
-                a = 0
-
-    size_of_gas_cloud += a
-
-    pygame.draw.rect(windowSurfaceObj, blackColor, Rect(0, 0, width, height))
-    pygame.draw.rect(windowSurfaceObj, redColor, Rect(a, 5, 10, 90))
-    pygame.display.update()
     width=TextField('Width (in pixels, 2 min) format : width')
     submit = SubmitField('send')
  
