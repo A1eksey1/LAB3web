@@ -140,7 +140,7 @@ def krest_image(file_name, choice, choice1):
     stroka=stroka+stroka1
      number = DecimalField('Contrast value 1 for upper left',
          validators=[InputRequired(),
-             NumberRange(min=0, max=100, message='Please give a value between 0 and 100')])
+             NumberRange(min=0, max=500, message='Please give a value between 0 and 500')])
     W=''
     R=''    
     G=''
