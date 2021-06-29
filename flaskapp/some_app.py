@@ -92,7 +92,7 @@ class IzForm(FlaskForm):
     recaptcha = RecaptchaField()
     user = TextField('RGB (0-255) format : R,G,B')
     width=TextField('Width (in pixels, 2 min) format : width')
-    otherch=TextField('Width of the chessboard')
+    heightTextField('Width of the chessboard')
     submit = SubmitField('send')
  
  
@@ -217,7 +217,7 @@ def iz():
         filename = os.path.join('./static', f'photo.{photo}')
         filename_graph = os.path.join('./static', f'newgr.png')
         form.upload.data.save(filename)
-        krest_image(filename, form.user.data, form.width.data, form.otherch.data)
+        krest_image(filename, form.user.data, form.width.data, form.height.data)
     return render_template('lab3.html', form=form, image_name=filename,filename_graph=filename_graph)
  
 
