@@ -1,26 +1,22 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 <!-- задаем заголовок страницы -->
+<label for=fader>Volume</label>
+<input type=range min=0 max=255 value=0 id=fader step=1 onchange="outputUpdate(value)">
+<output for=fader id=volume>50</output> 
+<script> 
+function outputUpdate(vol) { 
+  document.querySelector('#volume').value = vol; 
+}
+</script>
 {% block title %}This is an page{% endblock %}
 <!-- блок body -->
 {% block content %}
 {{ wtf.quick_form(form, method='post',enctype="multipart/form-data", action="lab3") }}
 <!-- один из стандартных тэгов html - заголовок второго уровня -->
-<label for=fader>Volume</label>
- 
-<input type=range min=0 max=100 value=50 id=fader step=1 onchange="outputUpdate(value)">
- 
-<output for=fader id=volume>50</output>
- 
-<script>
- 
-function outputUpdate(vol) {
- 
-  document.querySelector('#volume').value = vol;
- 
-}
- 
-</script>
+
+
+
 <h2>Image is here: </h2>
 <!-- отображаем загруженное изображение с закругленными углами -->
 <!-- если оно есть (после submit) -->
