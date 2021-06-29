@@ -204,7 +204,7 @@ def krest_image(file_name, choice, choice1,choice2):
     for i in range(0,x):
         for j in range(y-int(stroka1), y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
-
+    im1.save(file_name1)
     im.save(file_name)
     ax.imshow(im)
     
