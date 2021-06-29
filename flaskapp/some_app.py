@@ -7,7 +7,6 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
 import sys
-from PyQt5 import QtWidgets, QtCore
 import os
 from flask import request
 from flask import Response
