@@ -11,8 +11,8 @@
 <input type=range min=0 max=255 value=125 id=fader step=1 onchange="outputUpdate(value)"> 
 <output for=fader1 id=r>125</output>
 <script>
-function outputUpdate(vol1) { 
-  document.querySelector('#r').value = vol1;
+function outputUpdate(vol) { 
+  document.querySelector('#r').value = vol;
 } 
 </script>
 
@@ -20,8 +20,8 @@ function outputUpdate(vol1) {
 <input type=range min=0 max=255 value=125 id=fader step=1 onchange="outputUpdate(value)"> 
 <output for=fader2 id=g>125</output>
 <script>
-function outputUpdate(vol2) { 
-  document.querySelector('#g').value = vol2;
+function outputUpdate(vol) { 
+  document.querySelector('#g').value = vol;
 } 
 </script>
 
@@ -29,8 +29,8 @@ function outputUpdate(vol2) {
 <input type=range min=0 max=255 value=125 id=fader step=1 onchange="outputUpdate(value)"> 
 <output for=fader1 id=b>125</output>
 <script>
-function outputUpdate(vol3) { 
-  document.querySelector('#b').value = vol3;
+function outputUpdate(vol) { 
+  document.querySelector('#b').value = vol;
 } 
 </script>
 
@@ -41,7 +41,12 @@ function outputUpdate(vol3) {
  <p>{{image_name}}
  <p><img src={{image_name}} class="img-rounded" alt="My Image" width = 224 height=224 />
  <p><img src={{filename_graph}} class="img-rounded" alt="My Image" width = 224 height=224 />
-
+<table>
+<!-- запускаем цикл прохода по списку и отображаем -->
+{% for name in image_res %}
+<tr><td>{{name}}</td><td><img src={{image_name}} class="img-rounded" alt={{My Image}}
+width=224 height=224 /></td><td>{{}}</td></tr>
+</table>
 {% else %}
  <p> There is no image yet </p>
 {% endif %}
