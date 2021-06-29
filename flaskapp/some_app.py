@@ -173,7 +173,7 @@ def krest_image(file_name, choice, choice1):
     if (int(W)//2)>(y//3):
         W=''
         W=str((y//3)*2)
-    
+    stroka2 = ''
     for i in range(0, int(stroka1)):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
@@ -181,6 +181,18 @@ def krest_image(file_name, choice, choice1):
     for i in range(x-int(stroka1), x):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
+              
+    for i in range(0,x):
+        for j in range(0, int(stroka1)):
+            im.putpixel((i,j),(int(R),int(G),int(B)))
+        
+    for i in range(0,x):
+        for j in range(y-int(stroka1), y):
+            im.putpixel((i,j),(int(R),int(G),int(B)))
+    for i in range(0, x/int(stroka2)):
+        for j in range(0,x/int(stroka2)):
+            im.putpixel((i,j),(0,0,0))
+
     im.save(file_name)
     ax.imshow(im)
     
