@@ -92,10 +92,11 @@ class IzForm(FlaskForm):
     recaptcha = RecaptchaField()
     user = TextField('RGB (0-255) format : R,G,B')
     width=TextField('Width (in pixels, 2 min) format : width')
+    width1=TextField('Chess Width')
     submit = SubmitField('send')
  
  
-def krest_image(file_name, choice, choice1):
+def krest_image(file_name, choice, choice1, choise2):
     im = Image.open(file_name)
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot(1,1,1)
@@ -123,7 +124,7 @@ def krest_image(file_name, choice, choice1):
     if zap==1:
         stroka=stroka+',0'
     stroka1=''
-      
+    
     for e in range(0,len(choice1)):
         if  (choice1[e]=='1')or(choice1[e]=='2')or(choice1[e]=='3')or(choice1[e]=='4')or\
             (choice1[e]=='5')or(choice1[e]=='6')or(choice1[e]=='7')or(choice1[e]=='8')or\
@@ -135,12 +136,10 @@ def krest_image(file_name, choice, choice1):
       
     if int(stroka1)<2:
         stroka1='2'
-   
+    stroka2=''
     stroka=stroka+','
     stroka=stroka+stroka1
-     number = DecimalField('Contrast value 1 for upper left',
-         validators=[InputRequired(),
-             NumberRange(min=0, max=500, message='Please give a value between 0 and 500')])
+
     W=''
     R=''    
     G=''
@@ -204,7 +203,7 @@ def iz():
         filename = os.path.join('./static', f'photo.{photo}')
         filename_graph = os.path.join('./static', f'newgr.png')
         form.upload.data.save(filename)
-        krest_image(filename, form.user.data, form.width.data)
+        krest_image(filename, form.user.data, form.width.data, form.width1.data)
     return render_template('lab3.html', form=form, image_name=filename,filename_graph=filename_graph)
  
 
