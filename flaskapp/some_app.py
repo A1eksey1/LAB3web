@@ -196,6 +196,7 @@ def krest_image(file_name, choice, choice1):
 def iz():
     form = IzForm()
     filename = None
+    filename1 = None
     filename_graph=None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
@@ -203,7 +204,7 @@ def iz():
         filename_graph = os.path.join('./static', f'newgr.png')
         form.upload.data.save(filename)
         krest_image(filename, form.user.data, form.width.data)
-    return render_template('lab3.html', form=form, image_name=filename,filename_graph=filename_graph)
+    return render_template('lab3.html', form=form, image_name=filename, image_name1=filename, filename_graph=filename_graph)
  
 
  
