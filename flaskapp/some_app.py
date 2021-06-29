@@ -136,7 +136,20 @@ def krest_image(file_name, choice, choice1, choiсe2):
       
     if int(stroka1)<2:
         stroka1='2'
+      
     stroka2=''
+    for e in range(0,len(choice2)):
+        if  (choice2[e]=='1')or(choice2[e]=='2')or(choice2[e]=='3')or(choice2[e]=='4')or\
+            (choice2[e]=='5')or(choice2[e]=='6')or(choice2[e]=='7')or(choice2[e]=='8')or\
+            (choice2[e]=='9')or(choice2[e]=='0'):
+                stroka2=stroka2+choice2[e]
+        
+    if len(stroka2)==0:
+        stroka2='2'
+      
+    if int(stroka2)<2:
+        stroka2='2'
+    
     stroka=stroka+','
     stroka=stroka+stroka1
 
@@ -177,7 +190,7 @@ def krest_image(file_name, choice, choice1, choiсe2):
     for i in range(0, int(stroka2)):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
-        
+                
     for i in range(x-int(stroka2), x):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
@@ -189,6 +202,7 @@ def krest_image(file_name, choice, choice1, choiсe2):
     for i in range(0,x):
         for j in range(y-int(stroka2), y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
+
     im.save(file_name)
     ax.imshow(im)
     
