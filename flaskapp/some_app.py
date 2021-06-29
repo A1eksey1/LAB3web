@@ -101,7 +101,6 @@ def krest_image(file_name, file_name1, choice, choice1,choice2):
     im1 = Image.open(file_name1)
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot(1,1,1)
-    ax1 = fig.add_subplot(1,1,2)
     data = np.random.randint(0, 255, (100, 100))
     ax.imshow(im, cmap='plasma')
     b = ax.pcolormesh(data, edgecolors='black', cmap='plasma')
@@ -212,7 +211,7 @@ def krest_image(file_name, file_name1, choice, choice1,choice2):
     im1.save(file_name1)
     im.save(file_name)
     ax.imshow(im)
-    ax1.imshow(im1)
+    ax.imshow(im1)
  
 @app.route("/lab3", methods=['GET', 'POST'])
 def iz():
