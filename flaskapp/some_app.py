@@ -98,8 +98,10 @@ class IzForm(FlaskForm):
  
 def krest_image(file_name, choice, choice1):
     im = Image.open(file_name)
+    file_name1 = file_name
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot(1,1,1)
+    ax = fig.add_subplot(1,1,2)
     data = np.random.randint(0, 255, (100, 100))
     ax.imshow(im, cmap='plasma')
     b = ax.pcolormesh(data, edgecolors='black', cmap='plasma')
@@ -195,16 +197,19 @@ def krest_image(file_name, choice, choice1):
 @app.route("/lab3", methods=['GET', 'POST'])
 def iz():
     form = IzForm()
-    filename = None
     filename1 = None
+    filename = None
     filename_graph=None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
+        photo = form.upload.data.filename1.split('.')[-1]
         filename = os.path.join('./static', f'photo.{photo}')
+        filename1 = os.path.join('./static', f'photo.{photo}')
         filename_graph = os.path.join('./static', f'newgr.png')
         form.upload.data.save(filename)
-        krest_image(filename, form.user.data, form.width.data)
-    return render_template('lab3.html', form=form, image_name=filename, image_name1=filename, filename_graph=filename_graph)
+        form.upload.data.save(filename1)
+        krest_image(filename, filename1, form.user.data, form.width.data)
+    return render_template('lab3.html', form=form, image_name=filename, image_name1=filename1, filename_graph=filename_graph)
  
 
  
