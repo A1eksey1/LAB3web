@@ -99,8 +99,12 @@ def krest_image(file_name, choice, choice1):
     im = Image.open(file_name)
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot(1,1,1)
-    data = np.random.randint(0, 255, (100, 100))
+    ax1 = fi.add_subplot(1,1,2)
     ax.imshow(im, cmap='plasma')
+    data = np.random.randint(0, 255, (100, 100))
+    im1 = Image.open(file_name)
+    im1.save(file_name1)
+    ax1.imshow(im1)
     b = ax.pcolormesh(data, edgecolors='black', cmap='plasma')
     fig.colorbar(b, ax=ax)
     gr_path = "./static/newgr.png"
@@ -196,11 +200,69 @@ def krest_image(file_name, choice, choice1):
 def iz():
     form = IzForm()
     filename = None
+    filename1 = None
     filename_graph=None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static', f'photo.{photo}')
+        filename1 = os.path.join('./static', f'photo.{photo}')
         filename_graph = os.path.join('./static', f'newgr.png')
         form.upload.data.save(filename)
-        krest_image(filename, form.user.data, form.width.data)
-    return render_template('lab3.html', form=form, image_name=filename,filename_graph=filename_graph)
+        form.upload.data.save(filename1)
+        krest_image(filename, filename1, form.user.data, form.width.data)
+    return render_template('lab3.html', form=form, image_name=filename, image_name1=filename1, filename_graph=filename_graph)
+   
+# метод для обработки запроса от пользователя
+@app.route("/apinet", methods=['GET', 'POST'])
+def apinet():
+    print("1")
+    neurodic = {}
+    # проверяем что в запросе json данные
+    if request.mimetype == 'application/json':
+        # получаем json данные
+        print(request.__dir__())
+        data = request.get_json()
+        # берем содержимое по ключу, где хранится файл
+        # закодированный строкой base64
+        # декодируем строку в массив байт, используя кодировку utf-8
+        # первые 128 байт ascii и utf-8 совпадают, потому можно
+        print(data)
+        filebytes = data['imagebin'].encode('utf-8')
+        # декодируем массив байт base64 в исходный файл изображение
+        cfile = base64.b64decode(filebytes)
+        print("4")
+        # чтобы считать изображение как файл из памяти используем BytesIO
+        img = Image.open(BytesIO(cfile))
+        decode = neuronet.getresult([img])
+        neurodic = {}
+        for elem in decode:
+            neurodic[elem[0][1]] = str(elem[0][2])
+            print(elem)
+        # пример сохранения переданного файла
+        # handle = open('./static/f.png','wb')
+        # handle.write(cfile)
+        # handle.close()
+    # преобразуем словарь в json строку
+    ret = json.dumps(neurodic)
+    # готовим ответ пользователю
+    resp = Response(response=ret,
+                    status=200,
+                    mimetype="application/json")
+    # возвращаем ответ
+    return resp
+ 
+ 
+@app.route("/apixml", methods=['GET', 'POST'])
+def apixml():
+    # парсим xml файл в dom
+    dom = ET.parse("./static/xml/file.xml")
+    # парсим шаблон в dom
+    xslt = ET.parse("./static/xml/file.xslt")
+    # получаем трансформер
+    transform = ET.XSLT(xslt)
+    # преобразуем xml с помощью трансформера xslt
+    newhtml = transform(dom)
+    # преобразуем из памяти dom в строку, возможно, понадобится указать кодировку
+    strfile = ET.tostring(newhtml)
+    return strfile
+   
