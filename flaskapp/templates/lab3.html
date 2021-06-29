@@ -14,22 +14,7 @@ function outputUpdate(vol) {
   document.querySelector('#R').value = vol; 
 }
 </script>
-<label for=fader1>G</label>
-<input type=range min=0 max=255 value=0 id=fader1 step=1 onchange="outputUpdate(value) ">
-<output for=fader1 id=G>50</output> 
-<script> 
-function outputUpdate(vol) { 
-  document.querySelector('#G').value = vol; 
-}
-</script>
-<label for=fader2>B</label>
-<input type=range min=0 max=255 value=0 id=fader2 step=1 onchange="outputUpdate(value) ">
-<output for=fader2 id=B>50</output> 
-<script> 
-function outputUpdate(vol) { 
-  document.querySelector('#B').value = vol; 
-}
-</script>
+
 <h2>Image is here: </h2>
 <!-- отображаем загруженное изображение с закругленными углами -->
 <!-- если оно есть (после submit) -->
