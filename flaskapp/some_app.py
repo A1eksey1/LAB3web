@@ -95,7 +95,7 @@ class IzForm(FlaskForm):
     submit = SubmitField('send')
  
  
-def krest_image(file_name, choice, choice1):
+def krest_image(file_name, file_name1, choice, choice1):
     im = Image.open(file_name)
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot(1,1,1)
