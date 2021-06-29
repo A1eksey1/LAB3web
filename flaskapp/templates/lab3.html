@@ -7,18 +7,18 @@
 {{ wtf.quick_form(form, method='post',enctype="multipart/form-data", action="lab3") }}
 <!-- один из стандартных тэгов html - заголовок второго уровня -->
 
-<label for=fader>R</label>
-<input type=range min=0 max=255 value=125 id=fader step=1 onchange="outputUpdate(value)"> 
-<output for=fader id=R>125</output>
+<label for=fader1>R</label>
+<input type=range min=0 max=255 value=125 id=fader1 step=1 onchange="outputUpdate(value)"> 
+<output for=fader1 id=R>125</output>
 <script>
 function outputUpdate(vol) { 
   document.querySelector('#R').value = vol;
 } 
 </script>
 
-<label for=fader>G</label>
-<input type=range min=0 max=255 value=125 id=fader step=1 onchange="outputUpdate(value)"> 
-<output for=fader id=G>125</output>
+<label for=fader2>G</label>
+<input type=range min=0 max=255 value=125 id=fader2 step=1 onchange="outputUpdate(value)"> 
+<output for=fader2 id=G>125</output>
 <script>
 function outputUpdate(vol) { 
   document.querySelector('#G').value = vol;
