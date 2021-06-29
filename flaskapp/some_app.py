@@ -96,7 +96,7 @@ class IzForm(FlaskForm):
     submit = SubmitField('send')
  
  
-def krest_image(file_name, choice, choice1,choice2):
+def krest_image(file_name, file_name1, choice, choice1,choice2):
     im = Image.open(file_name)
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot(1,1,1)
@@ -188,20 +188,20 @@ def krest_image(file_name, choice, choice1,choice2):
         W=''
         W=str((y//3)*2)
     
-    for i in range(0, int(stroka2)):
+    for i in range(0, int(stroka1)):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
                 
-    for i in range(x-int(stroka2), x):
+    for i in range(x-int(stroka1), x):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
             
     for i in range(0,x):
-        for j in range(0, int(stroka2)):
+        for j in range(0, int(stroka1)):
             im.putpixel((i,j),(int(R),int(G),int(B)))
         
     for i in range(0,x):
-        for j in range(y-int(stroka2), y):
+        for j in range(y-int(stroka1), y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
 
     im.save(file_name)
@@ -211,15 +211,19 @@ def krest_image(file_name, choice, choice1,choice2):
 @app.route("/lab3", methods=['GET', 'POST'])
 def iz():
     form = IzForm()
+    filename1 = None
     filename = None
     filename_graph=None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
+        photo = form.upload.data.filename1.split('.')[-1]
+        filename1 = os.path.join('./static', f'photo.{photo}')
         filename = os.path.join('./static', f'photo.{photo}')
         filename_graph = os.path.join('./static', f'newgr.png')
         form.upload.data.save(filename)
-        krest_image(filename, form.user.data, form.width.data, form.width1.data)
-    return render_template('lab3.html', form=form, image_name=filename,filename_graph=filename_graph)
+        form.upload.data.save(filename1)
+        krest_image(filename, filename1, form.user.data, form.width.data, form.width1.data)
+    return render_template('lab3.html', form=form, image_name=filename,image_name1=filename1, filename_graph=filename_graph)
  
 
  
