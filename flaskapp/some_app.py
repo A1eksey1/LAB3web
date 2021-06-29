@@ -136,7 +136,6 @@ def krest_image(file_name, choice, choice1):
       
     if int(stroka1)<2:
         stroka1='2'
-
     stroka=stroka+','
     stroka=stroka+stroka1
       
@@ -203,7 +202,7 @@ def iz():
         filename = os.path.join('./static', f'photo.{photo}')
         filename_graph = os.path.join('./static', f'newgr.png')
         form.upload.data.save(filename)
-        krest_image(filename, form.user.data, form.width.data, form.height.data)
+        krest_image(filename, form.user.data, form.width.data)
     return render_template('lab3.html', form=form, image_name=filename,filename_graph=filename_graph)
  
 
