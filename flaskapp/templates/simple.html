@@ -4,17 +4,10 @@
   <title>{{ some_str }} </title>
   {% else %}
   <title>Hm, there is no string!</title>
-  {% endif %} 
+  {% endif %}
    </head>
   <body>
   <h1 style="color:{{ some_pars.color }};">Hello, {{ some_pars.user }}!</h1>
-  <h2>Results: </h2>
-  <table>
-   <!-- запускаем цикл прохода по списку и отображаем -->
-   {% for name in image_res %}
-   <tr><td>{{name}}</td><td><img src={{name}} class="img-rounded" alt={{name}}
-  width=224px /></td><td>{{image_res[name]}}</td></tr>
-   {% endfor %}
-  </table>
+  <h2>some_value {{ some_value }}!</h2>
   </body>
 </html>
