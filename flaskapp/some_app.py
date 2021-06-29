@@ -188,20 +188,20 @@ def krest_image(file_name, choice, choice1):
         W=''
         W=str((y//3)*2)
     
-    for i in range(0, int(stroka2)):
+    for i in range(0, int(stroka1)):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
         
-    for i in range(x-int(stroka2), x):
+    for i in range(x-int(stroka1), x):
         for j in range(0,y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
             
     for i in range(0,x):
-        for j in range(0, int(stroka2)):
+        for j in range(0, int(stroka1)):
             im.putpixel((i,j),(int(R),int(G),int(B)))
         
     for i in range(0,x):
-        for j in range(y-int(stroka2), y):
+        for j in range(y-int(stroka1), y):
             im.putpixel((i,j),(int(R),int(G),int(B)))
     im.save(file_name)
     ax.imshow(im)
