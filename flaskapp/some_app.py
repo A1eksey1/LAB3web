@@ -95,16 +95,12 @@ class IzForm(FlaskForm):
     submit = SubmitField('send')
  
  
-def krest_image(file_name, file_name1, choice, choice1):
+def krest_image(file_name, choice, choice1):
     im = Image.open(file_name)
     fig = plt.figure(figsize=(6, 4))
     ax = fig.add_subplot(1,1,1)
-    ax1 = fi.add_subplot(1,1,2)
-    ax.imshow(im, cmap='plasma')
     data = np.random.randint(0, 255, (100, 100))
-    im1 = Image.open(file_name)
-    im1.save(file_name1)
-    ax1.imshow(im1)
+    ax.imshow(im, cmap='plasma')
     b = ax.pcolormesh(data, edgecolors='black', cmap='plasma')
     fig.colorbar(b, ax=ax)
     gr_path = "./static/newgr.png"
@@ -142,7 +138,9 @@ def krest_image(file_name, file_name1, choice, choice1):
    
     stroka=stroka+','
     stroka=stroka+stroka1
-      
+     number = DecimalField('Contrast value 1 for upper left',
+         validators=[InputRequired(),
+             NumberRange(min=0, max=100, message='Please give a value between 0 and 100')])
     W=''
     R=''    
     G=''
@@ -200,18 +198,18 @@ def krest_image(file_name, file_name1, choice, choice1):
 def iz():
     form = IzForm()
     filename = None
-    filename1 = None
     filename_graph=None
     if form.validate_on_submit():
         photo = form.upload.data.filename.split('.')[-1]
         filename = os.path.join('./static', f'photo.{photo}')
-        filename1 = os.path.join('./static', f'photo.{photo}')
         filename_graph = os.path.join('./static', f'newgr.png')
         form.upload.data.save(filename)
-        form.upload.data.save(filename1)
-        krest_image(filename, filename1, form.user.data, form.width.data)
-    return render_template('lab3.html', form=form, image_name=filename, image_name1=filename1, filename_graph=filename_graph)
-   
+        krest_image(filename, form.user.data, form.width.data)
+    return render_template('lab3.html', form=form, image_name=filename,filename_graph=filename_graph)
+ 
+
+ 
+ 
 # метод для обработки запроса от пользователя
 @app.route("/apinet", methods=['GET', 'POST'])
 def apinet():
@@ -250,19 +248,3 @@ def apinet():
                     mimetype="application/json")
     # возвращаем ответ
     return resp
- 
- 
-@app.route("/apixml", methods=['GET', 'POST'])
-def apixml():
-    # парсим xml файл в dom
-    dom = ET.parse("./static/xml/file.xml")
-    # парсим шаблон в dom
-    xslt = ET.parse("./static/xml/file.xslt")
-    # получаем трансформер
-    transform = ET.XSLT(xslt)
-    # преобразуем xml с помощью трансформера xslt
-    newhtml = transform(dom)
-    # преобразуем из памяти dom в строку, возможно, понадобится указать кодировку
-    strfile = ET.tostring(newhtml)
-    return strfile
-   
